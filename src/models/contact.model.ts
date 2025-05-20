@@ -37,3 +37,12 @@ export const createContact = async (
   const [rows] = await db.query(`SELECT * FROM Contact WHERE id = ?`, [id]);
   return (rows as Contact[])[0];
 };
+
+export const findAllRelatedContacts = async (primaryId: number): Promise<Contact[]> => {
+    const [rows] = await db.query(
+      `SELECT * FROM Contact WHERE (id = ? OR linkedId = ?) AND deletedAt IS NULL`,
+      [primaryId, primaryId]
+    );
+    return rows as Contact[];
+  };
+  
