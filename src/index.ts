@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import {
     createContact,
@@ -82,3 +82,8 @@ app.post("/identify", async (req: Request, res: Response) : Promise<any> => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error(err.stack);
+    res.status(500).json({ error: "Internal Server Error" });
+  });
