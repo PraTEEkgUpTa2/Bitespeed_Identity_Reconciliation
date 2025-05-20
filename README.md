@@ -21,7 +21,6 @@ Given a POST request with an email and/or phoneNumber, the system must:
 - 🧠 **Language**: TypeScript
 - 🛢️ **Database**: MySQL
 - 🧪 **Testing**: Postman Collection included
-- 🚀 **Deployment**: Compatible with Render, Railway, Vercel
 
 ---
 
