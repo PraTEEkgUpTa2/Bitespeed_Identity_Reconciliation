@@ -96,7 +96,6 @@ VALUES
 ```
 git clone https://github.com/PraTEEkgUpTa2/Bitespeed_Identity_Reconciliation.git
 npm install
-
 ```
 #### Environment Variable
 Create a .env file in the root:
@@ -106,12 +105,10 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=bitespeed
-
 ```
 #### Run the Project
 ```
 npm run dev
-
 ```
 
 
