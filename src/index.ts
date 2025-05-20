@@ -5,6 +5,7 @@ import {
     findContactsByEmailOrPhone,
     findAllRelatedContacts,
     Contact,
+    updateContactLinkage
   } from "../src/models/contact.model";
 
 
@@ -44,14 +45,9 @@ app.post("/identify", async (req: Request, res: Response) : Promise<any> => {
         const primaries = existingContacts.filter(c => c.linkPrecedence === "primary");
         primaryContact = primaries.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())[0];
 
-        for (const contact of primaries.slice(1)) {
-            if (contact.linkPrecedence !== "secondary" || contact.linkedId !== primaryContact.id) {
-              await createContact(
-                contact.email,
-                contact.phoneNumber,
-                primaryContact.id,
-                "secondary"
-              );
+        for (const contact of existingContacts) {
+            if (contact.id !== primaryContact.id && contact.linkedId !== primaryContact.id) {
+              await updateContactLinkage(contact.id, primaryContact.id, "secondary");
             }
           }
 

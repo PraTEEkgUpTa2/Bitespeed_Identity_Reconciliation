@@ -46,3 +46,13 @@ export const findAllRelatedContacts = async (primaryId: number): Promise<Contact
     return rows as Contact[];
   };
   
+  export const updateContactLinkage = async (
+    contactId: number,
+    linkedId: number,
+    linkPrecedence: "primary" | "secondary"
+  ): Promise<void> => {
+    await db.query(
+      `UPDATE Contact SET linkedId = ?, linkPrecedence = ?, updatedAt = NOW() WHERE id = ?`,
+      [linkedId, linkPrecedence, contactId]
+    );
+  };
